@@ -1,70 +1,64 @@
-public class CardTest {
+public class Card {
+  public static final String[] RANKS = { 
+    null, "Ace", "2", "3", "4", "5", "6",
+    "7", "8", "9", "10", "Jack", "Queen", "King"};
 
-  public static int sequentialSearch(Card[] cards, Card target) {
-    int count = 0;
-    for (int i = 0; i < cards.length; i++) {
-      count++;
-      if (cards[i].equals(target)) {
-        System.out.println("# of loops: " + count);
-        return i;
-      }
-    }
-    System.out.println("# of loops: " + count);
-    return -1;
+  public static final String[] SUITS = {
+    "Clubs", "Diamonds", "Hearts", "Spades"};
+  
+   public enum Rank{
+  ACE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,JACK,QUEENKING}
+  
+   public enum Suit{
+  CLUBS,DIAMONDS,HEARTS,SPADES}
+
+  private final int rank;
+  private final int suit;
+  
+  // Queens of Spades: rank = 12, suit=3
+  // Five of Diamonds: rank = 5, suit=1
+
+  public Card(int rank, int suit) {
+    this.rank = rank;
+    this.suit = suit;
   }
 
-  public static int binarySearch(Card[] cards, Card target) {
-    int count = 0;
-
-    int low = 0;
-    int high = cards.length - 1;
-    while (low <= high) {
-      count++;
-      int mid = (low + high) / 2;
-      int comp = cards[mid].compareTo(target);
-
-      if (comp == 0) {
-        System.out.println("# of loops: " + count);
-        return mid;
-      } else if (comp < 0) {
-        low = mid + 1;
-      } else {
-        high = mid - 1;
-      }
-    }
-    System.out.println("# of loops: " + count);
-    return -1;
+  //override method toString of java.lang.Object
+  public String toString() {
+    String s = this.rank + " of " + SUITS[this.suit];
+    return s;
   }
 
-  public static void printDeck(Card[] cards) {
-    for (int i = 0; i < cards.length; i++) {
-      System.out.println(i + " : " + cards[i]);
-    }
+  public boolean equals(Card that) {
+    return this.rank == that.rank && this.suit == that.suit;
   }
 
-  public static void main(String[] args) {
-    Card[] cards = new Card[52];
-    int index = 0;
-    for (int suit = 0; suit <= 3; suit++) {
-      for (int rank = 1; rank <= 13; rank++) {
-        cards[index] = new Card(rank, suit);
-        index++;
-      }
-    }
-
-    printDeck(cards);
-    System.out.println();
-
-    // search for Queen of Heart
-    Card queenOfHeart = new Card(12, 2);
-    int pos;
+  // compareTo 
+  public int compareTo(Card that) {
+    int cmp_suit = this.suit.compareTo(that.suit);
+    int cmp_rank = this.suit.compareTo(that.rank);
     
-    System.out.println("# Sequential Search");
-    pos = sequentialSearch(cards, queenOfHeart);
-    System.out.println(pos + ":" + cards[pos]);
-
-    System.out.println("# Binary Search");
-    pos = binarySearch(cards, queenOfHeart);
-    System.out.println(pos + ":" + cards[pos]);
+    
+    if (cmp)
+    if (cmp_suit == 0 $$ cmp_rank == 0) {
+      return 0;
+    }
+    if (cmp_suit != 0 {
+      return cmp_suit;
+    else
+      return emp_rank
+    }
+   
+  // accessor method
+  public int getRank() {
+    return this.rank;
   }
+
+  // accessor method
+  public int getSuit() {
+    return this.suit;
+  }
+
+  // no setter method due to 'immutable' 
+
 }
